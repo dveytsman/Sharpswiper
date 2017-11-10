@@ -1,12 +1,12 @@
 # sharpshooter
-
+https://thrage1.github.io/sharpshooter/
 ## Background
-The Sharpshooter game is a fun and interactive way to improve the speed and accuracy of a player with a mouse input. Rocks will fall at random intervals that decrease in time and increase in speed as the game continues. As the rocks fall to the ground the user clicks on the rocks to destroy them. When 3 rocks hit the ground, the game is over. 
+The Sharpshooter game is a fun and interactive way to improve the speed and accuracy of a player with a mouse input. Rocks will fall at random intervals that decrease in time and increase in speed as the game continues. As the rocks fall to the ground the user clicks on the rocks to destroy them. When 3 rocks hit the ground, the game is over.
 
 ## Functionality
-- The game will be able to Start pause and restart the game. 
+- The game will be able to Start pause and restart the game.
 - The User will be able to directly interact with the Rocks that fall.
-- As the game progresses the rocks will fall at a faster rate. 
+- As the game progresses the rocks will fall at a faster rate.
 The project will also have a production readme and an instructional start screen.
 
 ## Wireframes
@@ -18,7 +18,7 @@ Game controls will include a start a stop and a restart button.
 
 ## Technologies
 
-This project will implement 
+This project will implement
  - JavaScript
  - HTML5
  - CSS3
@@ -42,6 +42,6 @@ This project will implement
  - Implement the logic of the game
  - Add the cursor interaction with the rocks
 
-**Day 4** 
+**Day 4**
 
  - fix and polish any code
