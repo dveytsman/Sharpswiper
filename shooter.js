@@ -28,35 +28,62 @@ document.addEventListener("DOMContentLoaded", () => {
 //   function droppy(){
 //     return count;
 //   }
-  function Square(x, y, w, h){
+
+  function Asteroid(x, y){
     this.x = x;
     this.y = y;
-    this.w = w;
-    this.h = h;
-    this.createStone = function(){
-      ctx.fillRect(this.x, this.y, this.h, this.w);
-    };
-    this.delete = function(){
-      rockArray.shift();
+    this.createAsteroid = function(){
+      ctx.drawImage(sprite, sx, sy, swidth, sheight, this.x, this.y, 60, 60);
     };
     this.update = function(){
-      if (this.y >= 480){
+      if(this.y >= 480){
         this.y = 0;
-        this.x = Math.random()* 490;
+        this.x = Math.random() * 480;
         count += 1;
-
         if(count >= 3){
           pause = true;
+        }else {
+          if(!pause){
+            this.y += 4;
+          }
         }
-      } else {
-        if(!pause){
-          this.y += 4;
-        }
+
+      }else if(!pause){
+        this.y += 4;
       }
-      this.createStone();
+      this.createAsteroid();
     };
     this.update();
   }
+  // function Square(x, y, w, h){
+  //   this.x = x;
+  //   this.y = y;
+  //   this.w = w;
+  //   this.h = h;
+  //   this.createStone = function(){
+  //     ctx.fillRect(this.x, this.y, this.h, this.w);
+  //   };
+  //   this.delete = function(){
+  //     rockArray.shift();
+  //   };
+  //   this.update = function(){
+  //     if (this.y >= 480){
+  //       this.y = 0;
+  //       this.x = Math.random()* 490;
+  //       count += 1;
+  //
+  //       if(count >= 3){
+  //         pause = true;
+  //       }
+  //     } else {
+  //       if(!pause){
+  //         this.y += 4;
+  //       }
+  //     }
+  //     this.createStone();
+  //   };
+  //   this.update();
+  // }
 
   // sq.update();
   // function createStone(){
@@ -82,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // drawMisses();
         // pause = true;
       }
-      rockArray.push(new Square(Math.random()* 490, 0, squareWidth, squareHeight));
+      rockArray.push(new Asteroid(Math.random()* 490, 0));
     }
 
     ctx.clearRect(0, 0, 500, 500);
@@ -91,7 +118,10 @@ document.addEventListener("DOMContentLoaded", () => {
     for (var j = 0; j < rockArray.length; j++) {
       // setTimeout(3000);
       rockArray[j].update();
-            ctx.drawImage(sprite, sx, sy, swidth, sheight, cx, cy, 60, 60);
+      debugger
+      console.log(rockArray[j]);
+        // cy++;
+        //     ctx.drawImage(sprite, sx, sy, swidth, sheight, cx, cy, 60, 60);
       // console.log(rockArray);
     }
     globalTimer++;
@@ -110,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
     switch (e.key) {
       case 'r':
       rockArray = [];
-      rockArray.push(new Square(Math.random()* 490, -100, squareWidth, squareHeight));
+      rockArray.push(new Asteroid(Math.random()* 490, -100));
       pause = false;
       count = 0;
       score = 0;
