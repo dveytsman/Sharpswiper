@@ -1,9 +1,22 @@
+var data = {
+        images: ["images/asteroid1.png"],
+        frames: {width:70, height:70},
+        animations: {
+            rotate:[1, 2, 3, 4]
+        }
+    };
+    var spriteSheet = new createjs.SpriteSheet(data);
+    var animation = new createjs.Sprite(spriteSheet, "run");
+
+
 var pause = false;
 var globalTimer = 0;
 var squareWidth = 40;
 var squareHeight = 40;
 var score = 0;
 var sprite = new Image();
+var explode = new Image();
+explode.src = "images/explode.png";
 var cx = 0;
 var cy = 0;
 var sx = 0;
@@ -28,7 +41,18 @@ document.addEventListener("DOMContentLoaded", () => {
 //   function droppy(){
 //     return count;
 //   }
+  function Explode(x, y){
+    this.positions = [];
+    this.x = x;
+    this.y = y;
+    this.bang = function(){
+      ctx.drawImage(explode, sx, sy, 90, 90, this.x, this.y, 60, 60);
+    };
+    this.update = function(){
 
+    };
+    this.bang();
+  }
   function Asteroid(x, y){
     this.x = x;
     this.y = y;
@@ -118,8 +142,6 @@ document.addEventListener("DOMContentLoaded", () => {
     for (var j = 0; j < rockArray.length; j++) {
       // setTimeout(3000);
       rockArray[j].update();
-      debugger
-      console.log(rockArray[j]);
         // cy++;
         //     ctx.drawImage(sprite, sx, sy, swidth, sheight, cx, cy, 60, 60);
       // console.log(rockArray);
@@ -160,9 +182,13 @@ document.addEventListener("DOMContentLoaded", () => {
     for (var i = 0; i < rockArray.length; i++) {
       if((rockArray[i].y + squareHeight > coords.y) && (rockArray[i].y < coords.y)){
         if((rockArray[i].x + squareWidth > coords.x)&& (rockArray[i].x  < coords.x)){
+          let a = rockArray[i].y;
+          let b = rockArray[i].x;
           rockArray[i].y = Math.random() * -100 - squareHeight/2;
           rockArray[i].x = Math.random() * 480;
           score++;
+          var thing = new Explode(b, a);
+          thing.bang();
           // alert(score);
 
         }
