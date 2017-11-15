@@ -128,12 +128,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    if ( globalTimer % 300 === 0) {
+    if ( globalTimer % 300 === 0 && !pause) {
       if (count >=3){
         // drawMisses();
         // pause = true;
       }
-      rockArray.push(new Asteroid(Math.random()* 490, 0));
+      rockArray.push(new SpriteSheet('images/asteroid1.png', 71, 71, 15, 19));
+      console.log(rockArray);
     }
 
     ctx.clearRect(0, 0, 500, 500);
@@ -162,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
     switch (e.key) {
       case 'r':
       rockArray = [];
-      rockArray.push(new Asteroid(Math.random()* 490, -100));
+      rockArray.push(new SpriteSheet('images/asteroid1.png', 71, 71, 8, 19));
       pause = false;
       count = 0;
       score = 0;
@@ -218,24 +219,103 @@ document.addEventListener("DOMContentLoaded", () => {
   // sprite.onload = function(){
   //   ctx.drawImage(sprite, sx, sy, swidth, sheight, cx, cy, 50, 50);
   // };
-  function animate(){
-    requestAnimationFrame(animate);
-    now = Date.now();
-    elapsedTime = now - then;
-    // drawScore();
-
-    if(elapsedTime > fpsInterval){
-      then = now - (elapsedTime % fpsInterval);
-      if(!pause){
-        fall();
+  // function animate(){
+  //   requestAnimationFrame(animate);
+  //   now = Date.now();
+  //   elapsedTime = now - then;
+  //   // drawScore();
+  //
+  //   if(elapsedTime > fpsInterval){
+  //     then = now - (elapsedTime % fpsInterval);
+  //     if(!pause){
+  //       fall();
         document.getElementById("counter").innerHTML = "lives " + (3 - count);
         document.getElementById("score").innerHTML = "score " + (score);
-        // document.write('hi');
-        // counter.append(count);
+  //       // document.write('hi');
+  //       // counter.append(count);
+  //     }
+  //   }
+  // }
+  // startAnimating(30);
+  //--------------------------------------------sprite attempt
+  function SpriteSheet(path, frameWidth, frameHeight, frameSpeed, endFrame) {
+
+    var image = new Image();
+    var framesPerRow;
+    var currentFrame = 0;  // the current frame to draw
+    var counter = 0;
+    this.x = Math.random() * 480;
+    this.y = 0;
+    // this.createStone = function(){
+    //    ctx.drawImage(sprite, sx, sy, swidth, sheight, this.x, this.y, 60, 60);
+    //  };
+    this.update = function() {
+      document.getElementById("counter").innerHTML = "lives " + (3 - count);
+      document.getElementById("score").innerHTML = "score " + (score);
+      if(this.y >= 480){
+        this.y = 0;
+        this.x = Math.random() * 480;
+        count += 1;
+        if(count >= 3){
+          pause = true;
+        }else {
+          if(!pause){
+            this.y += 1;
+          }
+        }
+
+      }else if(!pause){
+        this.y += 1;
       }
+
+      // update to the next frame if it is time
+      if (counter == (frameSpeed - 1))
+      currentFrame = (currentFrame + 1) % endFrame;
+
+      // update the counter
+      counter = (counter + 1) % frameSpeed;
+
+    };
+    this.draw = function(x, y) {
+      // get the row and col of the frame
+      var row = Math.floor(currentFrame / framesPerRow);
+      var col = Math.floor(currentFrame % framesPerRow);
+
+      ctx.drawImage(
+        image,
+        col * frameWidth, row * frameHeight,
+        frameWidth, frameHeight,
+        x, y,
+        frameWidth, frameHeight);
+      };
+      // calculate the number of frames in a row after the image loads
+      var self = this;
+      image.onload = function() {
+        framesPerRow = Math.floor(image.width / frameWidth);
+      };
+
+      image.src = "images/asteroid1.png";
     }
+
+  var splosion = new SpriteSheet('images/explode.png', 60, 60, 3, 14);
+
+function animate() {
+    fall();
+   requestAnimationFrame( animate );
+   ctx.clearRect(0, 0, 500, 500);
+
+  //  splosion.update();
+  //  splosion.draw(200, 10);
+  for (var i = 0; i < rockArray.length; i++) {
+    rockArray[i].update();
+    rockArray[i].draw(rockArray[i].x, rockArray[i].y);
   }
-  startAnimating(30);
+  //  spritesheet.update();
+  //  spritesheet.draw(spritesheet.x, spritesheet.y);
+}
+//---------------------------next atttempt
+animate();
+  //---------------------
 });
 function getMousePos(canv, evt) {
         var rect = canv.getBoundingClientRect();
