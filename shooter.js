@@ -1,12 +1,4 @@
-var data = {
-        images: ["images/asteroid1.png"],
-        frames: {width:70, height:70},
-        animations: {
-            rotate:[1, 2, 3, 4]
-        }
-    };
-    var spriteSheet = new createjs.SpriteSheet(data);
-    var animation = new createjs.Sprite(spriteSheet, "run");
+
 
 
 var pause = false;
@@ -114,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
   //   ctx.fillRect(x, y, h, w);
   // }
   var rockArray = [];
-
+  var explosionArray = [];
   // for (var i = 0; i < 1; i++) {
   //   const a = 20;
   //   const b = 20;
@@ -133,8 +125,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // drawMisses();
         // pause = true;
       }
-      rockArray.push(new SpriteSheet('images/asteroid1.png', 71, 71, 15, 19));
-      console.log(rockArray);
+      rockArray.push(new SpriteSheet());
+      // console.log(rockArray);
     }
 
     ctx.clearRect(0, 0, 500, 500);
@@ -159,11 +151,11 @@ document.addEventListener("DOMContentLoaded", () => {
   //   thing.update();
   // }, 100);
   document.addEventListener("keypress", (e) => {
-    console.log(e.key);
+    // console.log(e.key);
     switch (e.key) {
       case 'r':
       rockArray = [];
-      rockArray.push(new SpriteSheet('images/asteroid1.png', 71, 71, 8, 19));
+      rockArray.push(new SpriteSheet());
       pause = false;
       count = 0;
       score = 0;
@@ -183,14 +175,15 @@ document.addEventListener("DOMContentLoaded", () => {
     for (var i = 0; i < rockArray.length; i++) {
       if((rockArray[i].y + squareHeight > coords.y) && (rockArray[i].y < coords.y)){
         if((rockArray[i].x + squareWidth > coords.x)&& (rockArray[i].x  < coords.x)){
-          let a = rockArray[i].y;
-          let b = rockArray[i].x;
+          let a = rockArray[i].x;
+          let b = rockArray[i].y;
+          console.log(a, b)
+          explosionArray.push(new ExplosionSheet(a, b));
           rockArray[i].y = Math.random() * -100 - squareHeight/2;
           rockArray[i].x = Math.random() * 480;
+          console.log(explosionArray);
           score++;
-          var thing = new Explode(b, a);
-          thing.bang();
-          // alert(score);
+
 
         }
       }
@@ -203,12 +196,12 @@ document.addEventListener("DOMContentLoaded", () => {
   var startTime;
   var fpsInterval;
   var framespersec;
-  function startAnimating(fps){
-    fpsInterval = 1000/fps;
-    then = Date.now();
-    startTime = then;
-    animate();
-  }
+  // function startAnimating(fps){
+  //   fpsInterval = 1000/fps;
+  //   then = Date.now();
+  //   startTime = then;
+  //   animate();
+  // }
   // var sprite = new Image();
   // var cx = 0;
   // var cy = 0;
@@ -237,9 +230,59 @@ document.addEventListener("DOMContentLoaded", () => {
   //   }
   // }
   // startAnimating(30);
-  //--------------------------------------------sprite attempt
-  function SpriteSheet(path, frameWidth, frameHeight, frameSpeed, endFrame) {
+  function ExplosionSheet(ex, ey){
+    var path = 'images/explode.png';
+    var frameWidth = 128;
+    var frameHeight = 128;
+    var frameSpeed = 3;
+    var endFrame = 15;
+    var image = new Image();
+    var framesPerRow;
+    var currentFrame = 0;
+    var counter = 0;
+    var firstTime = 0;
+    this.x = ex;
+    this.y = ey;
+    this.update = function(){
+      // update to the next frame if it is time
+      if(firstTime < 44){
+        console.log(firstTime)
+        firstTime++;
+        if (counter == (frameSpeed - 1))
+        currentFrame = (currentFrame + 1) % endFrame;
 
+        // update the counter
+        counter = (counter + 1) % frameSpeed;
+      }
+
+    };
+    this.draw = function(x, y) {
+      // get the row and col of the frame
+      var row = Math.floor(currentFrame / framesPerRow);
+      var col = Math.floor(currentFrame % framesPerRow);
+
+      ctx.drawImage(
+        image,
+        col * frameWidth, row * frameHeight,
+        frameWidth, frameHeight,
+        x, y,
+        frameWidth, frameHeight);
+      };
+      // calculate the number of frames in a row after the image loads
+      var self = this;
+      image.onload = function() {
+        framesPerRow = Math.floor(image.width / frameWidth);
+      };
+
+      image.src = "images/explode.png";
+    }
+  //--------------------------------------------sprite attempt
+  function SpriteSheet() {
+    var path = 'images/asteroid1.png';
+    var frameWidth = 71;
+    var frameHeight = 71;
+    var frameSpeed = 15;
+    var endFrame = 19;
     var image = new Image();
     var framesPerRow;
     var currentFrame = 0;  // the current frame to draw
@@ -297,21 +340,32 @@ document.addEventListener("DOMContentLoaded", () => {
       image.src = "images/asteroid1.png";
     }
 
-  var splosion = new SpriteSheet('images/explode.png', 60, 60, 3, 14);
+  // new ExplosionSheet();
 
 function animate() {
-    fall();
    requestAnimationFrame( animate );
    ctx.clearRect(0, 0, 500, 500);
 
-  //  splosion.update();
-  //  splosion.draw(200, 10);
+  //  explosion.update();
+  //  explosion.draw(200, 10);
+  fall();
   for (var i = 0; i < rockArray.length; i++) {
     rockArray[i].update();
     rockArray[i].draw(rockArray[i].x, rockArray[i].y);
   }
-  //  spritesheet.update();
-  //  spritesheet.draw(spritesheet.x, spritesheet.y);
+  for (var i = 0; i < explosionArray.length; i++) {
+    explosionArray[i].update();
+    const x = explosionArray[i].x - 25;
+    const y = explosionArray[i].y - 25;
+    explosionArray[i].draw(x, y);
+  }
+  // explosionArray = [];
+  // for (var i = 0; i < explosionArray.length; i++) {
+  //   explosionArray[i].update();
+  //  explosionArray[i].draw(rockArray[i].x, rockArray[i].y);
+  // }
+  //  explosion.update();
+  //  explosion.draw(200, 200);
 }
 //---------------------------next atttempt
 animate();
