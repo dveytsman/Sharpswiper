@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     this.update = function(){
       if(this.y >= 480){
         this.y = 0;
-        this.x = Math.random() * 480;
+        this.x = Math.random() * 420;
         count += 1;
         if(count >= 3){
           pause = true;
@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
           console.log(a, b)
           explosionArray.push(new ExplosionSheet(a, b));
           rockArray[i].y = Math.random() * -100 - squareHeight/2;
-          rockArray[i].x = Math.random() * 480;
+          rockArray[i].x = Math.random() * 450;
           console.log(explosionArray);
           score++;
 
@@ -246,7 +246,6 @@ document.addEventListener("DOMContentLoaded", () => {
     this.update = function(){
       // update to the next frame if it is time
       if(firstTime < 44){
-        console.log(firstTime)
         firstTime++;
         if (counter == (frameSpeed - 1))
         currentFrame = (currentFrame + 1) % endFrame;
@@ -297,7 +296,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("score").innerHTML = "score " + (score);
       if(this.y >= 480){
         this.y = 0;
-        this.x = Math.random() * 480;
+        this.x = Math.random() * 450;
         count += 1;
         if(count >= 3){
           pause = true;
