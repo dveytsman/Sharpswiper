@@ -93,6 +93,7 @@ body > div > div {
 }
 
 a {
+  width: 150px;
   text-decoration: none;
   -moz-border-radius: 30px;
   -webkit-border-radius: 30px;
