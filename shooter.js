@@ -19,6 +19,9 @@ var sheight = 70;
 document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.querySelector("canvas");
   const ctx = canvas.getContext("2d");
+  pause = true;
+  let c = document.querySelector(".modal");
+  c.innerHTML = '<div id="start">Welcome to Sharp swiper<br>by David Veytsman <br> press space bar to pause <br> press R to start game. <br> Have fun</div>';
 
   ctx.fillStyle = "white";
   var count = 0;
