@@ -154,6 +154,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // console.log(e.key);
     switch (e.key) {
       case 'r':
+      let c = document.querySelector(".modal");
+      c.innerHTML = '<div></div>';
       rockArray = [];
       rockArray.push(new SpriteSheet());
       pause = false;
@@ -300,6 +302,12 @@ document.addEventListener("DOMContentLoaded", () => {
         count += 1;
         if(count >= 3){
           pause = true;
+          let c = document.querySelector(".modal");
+          c.innerHTML = '<div id="lost">You Lost<br> press R to restart</div>';
+          var node = document.createElement("p");                 // Create a <li> node
+          var textnode = document.createTextNode(score + ' was your score, try again');         // Create a text node
+          node.appendChild(textnode);                              // Append the text to <li>
+          document.getElementById("lost").appendChild(node);     // Append <li> to <ul> with id="myList"
         }else {
           if(!pause){
             this.y += 1;
