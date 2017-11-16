@@ -178,8 +178,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     var coords = getMousePos(canvas, e);
     for (var i = 0; i < rockArray.length; i++) {
-      if((rockArray[i].y + squareHeight > coords.y) && (rockArray[i].y < coords.y)){
-        if((rockArray[i].x + squareWidth > coords.x)&& (rockArray[i].x  < coords.x)){
+      if((rockArray[i].y + squareHeight + 30 > coords.y) && (rockArray[i].y < coords.y)){
+        if((rockArray[i].x + squareWidth + 30 > coords.x)&& (rockArray[i].x  < coords.x)){
           let a = rockArray[i].x;
           let b = rockArray[i].y;
           console.log(a, b)
