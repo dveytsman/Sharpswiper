@@ -184,8 +184,8 @@ document.addEventListener("DOMContentLoaded", () => {
           let b = rockArray[i].y;
           console.log(a, b)
           explosionArray.push(new ExplosionSheet(a, b));
-          rockArray[i].y = Math.random() * -100 - squareHeight/2;
-          rockArray[i].x = Math.random() * 450;
+          rockArray[i].y = ((Math.random() * -100) -100);
+          rockArray[i].x = Math.random() * 400;
           console.log(explosionArray);
           score++;
 
@@ -292,7 +292,7 @@ document.addEventListener("DOMContentLoaded", () => {
     var currentFrame = 0;  // the current frame to draw
     var counter = 0;
     this.x = Math.random() * 480;
-    this.y = 0;
+    this.y = ((Math.random() * -100) -100);
     // this.createStone = function(){
     //    ctx.drawImage(sprite, sx, sy, swidth, sheight, this.x, this.y, 60, 60);
     //  };
@@ -300,7 +300,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("counter").innerHTML = "lives " + (3 - count);
       document.getElementById("score").innerHTML = "score " + (score);
       if(this.y >= 480){
-        this.y = 0;
+        this.y = ((Math.random() * -100) -100);
         this.x = Math.random() * 450;
         count += 1;
         if(count >= 3){
