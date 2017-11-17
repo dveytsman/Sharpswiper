@@ -5,6 +5,9 @@ canvas{
   background-image: url('images/background.jpg');
   background-size: 100% 100%;
 }
+/*.background{
+  display: none;
+}*/
 .body{
   display: flex;
   justify-content: center;
@@ -51,6 +54,13 @@ text-align: center;
 }
 .fa-angellist{
   font-size: 25px;
+}
+.fa-laptop{
+  font-size: 25px;
+  margin-left: -4px;
+}
+.fa-laptop:before{
+  margin-left: -4px;
 }
 span{
   text-align: center;

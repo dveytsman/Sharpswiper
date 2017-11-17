@@ -182,11 +182,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if((rockArray[i].x + squareWidth + 30 > coords.x)&& (rockArray[i].x  < coords.x)){
           let a = rockArray[i].x;
           let b = rockArray[i].y;
-          console.log(a, b)
           explosionArray.push(new ExplosionSheet(a, b));
           rockArray[i].y = ((Math.random() * -100) -100);
           rockArray[i].x = Math.random() * 400;
-          console.log(explosionArray);
           score++;
 
 
@@ -280,6 +278,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       image.src = "images/explode.png";
     }
+    //============================creating scrolling background-co
+
   //--------------------------------------------sprite attempt
   function SpriteSheet() {
     var path = 'images/asteroid1.png';
@@ -349,12 +349,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       image.src = "images/asteroid1.png";
     }
-
+function bg(){
+  var background = new Image();
+  background.src = 'images/scrollbg.png';
+}
   // new ExplosionSheet();
-
 function animate() {
    requestAnimationFrame( animate );
    ctx.clearRect(0, 0, 500, 500);
+    var totalSeconds = 0;
 
   //  explosion.update();
   //  explosion.draw(200, 10);
