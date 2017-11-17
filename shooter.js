@@ -313,12 +313,12 @@ document.addEventListener("DOMContentLoaded", () => {
           document.getElementById("lost").appendChild(node);     // Append <li> to <ul> with id="myList"
         }else {
           if(!pause){
-            this.y += 1;
+            this.y += 1 + score / 200;
           }
         }
 
       }else if(!pause){
-        this.y += 1;
+        this.y += 1 + score / 200;
       }
 
       // update to the next frame if it is time

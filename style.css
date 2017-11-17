@@ -2,6 +2,8 @@ canvas{
   border: solid 1px pink;
   border-radius: 10px;
   background-color: black;
+  background-image: url('images/background.jpg');
+  background-size: 100% 100%;
 }
 .body{
   display: flex;
