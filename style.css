@@ -5,9 +5,18 @@ canvas{
   background-image: url('images/background.jpg');
   background-size: 100% 100%;
 }
-/*.background{
-  display: none;
-}*/
+#lefty{
+  margin-left: -20px;
+  outline: none;
+  width: 240px;
+  height: 50px;
+}
+#mutey{
+  margin-left: -20px;
+  outline: none;
+  width: 240px;
+  height: 50px;
+}
 .body{
   display: flex;
   justify-content: center;
@@ -45,6 +54,12 @@ button{
   color: #451606;
   position:fixed;
 }
+.fa-volume-up{
+  font-size: 20px;
+}
+.fa-pause{
+  font-size: 20px;
+}
 .fa-github{
   font-size: 25px;
 }
@@ -64,6 +79,7 @@ text-align: center;
 }
 span{
   text-align: center;
+  color: white;
 }
 .navs{
   background-color: #786128;

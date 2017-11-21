@@ -1,7 +1,7 @@
 
 
 
-var pause = false;
+var pause = true;
 var globalTimer = 0;
 var squareWidth = 40;
 var squareHeight = 40;
@@ -15,13 +15,36 @@ var sx = 0;
 var sy = 0;
 var swidth = 70;
 var sheight = 70;
+var muted = true;
     sprite.src = "images/asteroid1.png";
 document.addEventListener("DOMContentLoaded", () => {
+  var music = new Audio("sound/starwars.mp3");
+  music.loop = true;
+  music.play();
+  music.volume = .2;
+  music.muted = true;
+  var mutey = document.querySelector("#mutey");
+  mutey.addEventListener("click", ()=> {
+    muted = !muted;
+      if(music.muted){
+        music.currentTime = 0;
+        music.muted = !music.muted;
+      }else{
+        music.muted = !music.muted;
+      }
+
+  });
+var lefty = document.querySelector("#lefty");
+lefty.addEventListener("click", () => {
+  pause = !pause;
+});
+  var laser = new Audio("sound/saberon.mp3");
+
   const canvas = document.querySelector("canvas");
   const ctx = canvas.getContext("2d");
-  pause = true;
-  let c = document.querySelector(".modal");
-  c.innerHTML = '<div id="start">Welcome to Sharp swiper<br>by David Veytsman <br> press space bar to pause <br> press R to start game. <br> Have fun</div>';
+  pause = false;
+  // let c = document.querySelector(".modal");
+  // c.innerHTML = '<div id="start">Welcome to Sharp swiper<br>by David Veytsman <br> press space bar to pause <br> press R to start game. <br> Have fun</div>';
 
   ctx.fillStyle = "white";
   var count = 0;
@@ -165,14 +188,18 @@ document.addEventListener("DOMContentLoaded", () => {
       count = 0;
       score = 0;
         break;
-      case ' ':
+      case 'p':
         pause = !pause;
         break;
-      // case ''
+        case " ":
+        e.preventdefault();
+        break;
+
       default:
         return;
       }
   });
+  var humArray = [];
   document.addEventListener("mousemove", (e) => {
     if(!pause){
 
@@ -182,12 +209,26 @@ document.addEventListener("DOMContentLoaded", () => {
         if((rockArray[i].x + squareWidth + 30 > coords.x)&& (rockArray[i].x  < coords.x)){
           let a = rockArray[i].x;
           let b = rockArray[i].y;
+          const soundy = new Audio("sound/clashy.wav");
+          if(!muted){
+            soundy.volume = 0.1;
+            soundy.play();
+          }
+
+          // laser.play();
           explosionArray.push(new ExplosionSheet(a, b));
           rockArray[i].y = ((Math.random() * -100) -100);
           rockArray[i].x = Math.random() * 400;
           score++;
 
 
+        }else {
+          if(!muted){
+            humArray.push(new Audio("sound/hum.wav"));
+            if(humArray.length > 0){
+              humArray[0].play();
+            }
+          }
         }
       }
     }
