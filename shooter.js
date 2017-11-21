@@ -32,11 +32,14 @@ document.addEventListener("DOMContentLoaded", () => {
       }else{
         music.muted = !music.muted;
       }
+      canvas.focus();
 
   });
 var lefty = document.querySelector("#lefty");
 lefty.addEventListener("click", () => {
   pause = !pause;
+  canvas.focus();
+  console.log('hi');
 });
   var laser = new Audio("sound/saberon.mp3");
 

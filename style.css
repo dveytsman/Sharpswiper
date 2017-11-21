@@ -9,13 +9,37 @@ canvas{
   margin-left: -20px;
   outline: none;
   width: 240px;
-  height: 50px;
+  height: 35px;
+  padding-top: 10px;
+  border-radius: 25px;
+  margin-bottom: 10px;
+  border: rgb(192, 192, 192) 2px outset;
+  text-transform: uppercase;
+}
+#lefty:hover{
+  background-color: #4d1111;
+}
+#lefty:active{
+  background-color: #2d0808;
+
+}
+#mutey:hover{
+  background-color: #4d1111;
+}
+#mutey:active{
+  background-color: #2d0808;
+
 }
 #mutey{
+  text-transform: uppercase;
   margin-left: -20px;
   outline: none;
   width: 240px;
-  height: 50px;
+  height: 35px;
+  padding-top: 10px;
+  border-radius: 25px;
+  margin-bottom: 5px;
+  border: rgb(192, 192, 192) 2px outset;
 }
 .body{
   display: flex;
