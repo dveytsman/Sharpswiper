@@ -5,6 +5,9 @@ canvas{
   background-image: url('images/background.jpg');
   background-size: 100% 100%;
 }
+.canvas-div{
+  position: relative;
+}
 #lefty{
   margin-left: -20px;
   outline: none;
@@ -59,9 +62,9 @@ button{
 #start{
   color: #ae872a !important;
   border-radius: 25px;
-  position:absolute;
-  margin-left: 29%;
-  margin-top: 80px;
+  position: absolute;
+  margin-top: -515px;
+  margin-left: -10px;
  padding-top: 2%;
   font-size: 40px;
   font-weight: 900;
@@ -70,23 +73,21 @@ button{
   height: 500px;
   background-color: rgba(0, 0, 0, .5);
   color: #451606;
-  position:fixed;
 }
 #lost{
   color: #ae872a !important;
   border-radius: 25px;
-  position:absolute;
-  margin-left: 29%;
-  margin-top: 80px;
+  position: absolute;
+  margin-top: -515px;
+  margin-left: -10px;
  padding-top: 2%;
-  font-size: 60px;
+  font-size: 40px;
   font-weight: 900;
   z-index: 5;
   width: 520px;
   height: 500px;
   background-color: rgba(0, 0, 0, .5);
   color: #451606;
-  position:fixed;
 }
 .fa-volume-up{
   font-size: 20px;

@@ -302,12 +302,9 @@ lefty.addEventListener("click", () => {
             pause = true;
             let c = document.querySelector(".modal");
             c.innerHTML = '<div id="lost">You Lost<br> press R to restart</div>';
-            var node = document.createElement("p");                 // Create a <li> node
-            var textnode = document.createTextNode(score + ' was your score, try again');         // Create a text node
-            node.appendChild(textnode);                              // Append the text to <li>
-            // c.appendChild(node);
+                         // 
         }
-          // document.getElementById("lost").appendChild(node);     // Append <li> to <ul> with id="myList"
+
         }else {
           if(!pause && !gameover){
             this.y += 1 + score / 200;
@@ -357,8 +354,6 @@ function animate() {
    ctx.clearRect(0, 0, 500, 500);
     var totalSeconds = 0;
 
-  //  explosion.update();
-  //  explosion.draw(200, 10);
   fall();
   for (var i = 0; i < rockArray.length; i++) {
     rockArray[i].update();
@@ -370,13 +365,7 @@ function animate() {
     const y = explosionArray[i].y - 25;
     explosionArray[i].draw(x, y);
   }
-  // explosionArray = [];
-  // for (var i = 0; i < explosionArray.length; i++) {
-  //   explosionArray[i].update();
-  //  explosionArray[i].draw(rockArray[i].x, rockArray[i].y);
-  // }
-  //  explosion.update();
-  //  explosion.draw(200, 200);
+
 }
 //---------------------------next atttempt
 animate();
