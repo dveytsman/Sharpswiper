@@ -1,11 +1,14 @@
 
+var gameover = false;
 
-
+var score = 0;
 var pause = true;
 var globalTimer = 0;
 var squareWidth = 40;
 var squareHeight = 40;
 var score = 0;
+var highscore = localStorage.getItem('highscore') || 0;
+
 var sprite = new Image();
 var explode = new Image();
 explode.src = "images/explode.png";
@@ -18,6 +21,7 @@ var sheight = 70;
 var muted = true;
     sprite.src = "images/asteroid1.png";
 document.addEventListener("DOMContentLoaded", () => {
+
   var music = new Audio("sound/starwars.mp3");
   music.loop = true;
   music.play();
@@ -39,15 +43,15 @@ var lefty = document.querySelector("#lefty");
 lefty.addEventListener("click", () => {
   pause = !pause;
   canvas.focus();
-  console.log('hi');
 });
   var laser = new Audio("sound/saberon.mp3");
 
   const canvas = document.querySelector("canvas");
   const ctx = canvas.getContext("2d");
   pause = false;
-  // let c = document.querySelector(".modal");
-  // c.innerHTML = '<div id="start">Welcome to Sharp swiper<br>by David Veytsman <br> press space bar to pause <br> press R to start game. <br> Have fun</div>';
+  gameover = true;
+  let c = document.querySelector(".modal");
+  c.innerHTML = '<div id="start">Welcome to Sharp swiper<br> <br>Move lightsaber across the asteroids to destroy them. Try to destroy them before they hit the ground. Miss 3 and you lose. <br> press R to start game. <br> Have fun</div>';
 
   ctx.fillStyle = "white";
   var count = 0;
@@ -155,18 +159,14 @@ lefty.addEventListener("click", () => {
         // pause = true;
       }
       rockArray.push(new SpriteSheet());
-      // console.log(rockArray);
     }
 
     ctx.clearRect(0, 0, 500, 500);
-    // drawScore();
-    // drawMisses();
     for (var j = 0; j < rockArray.length; j++) {
       // setTimeout(3000);
       rockArray[j].update();
         // cy++;
         //     ctx.drawImage(sprite, sx, sy, swidth, sheight, cx, cy, 60, 60);
-      // console.log(rockArray);
     }
     globalTimer++;
   }
@@ -183,6 +183,18 @@ lefty.addEventListener("click", () => {
     // console.log(e.key);
     switch (e.key) {
       case 'r':
+      //  highscore = localStorage.getItem("highscore");
+       highscore = localStorage.getItem('highscore') || 0;
+      if(highscore !== null){
+          if (score > highscore) {
+              localStorage.setItem("highscore", score);
+          }
+      }
+      else{
+          localStorage.setItem("highscore", score);
+      }
+      console.log(highscore);
+      gameover =  false;
       let c = document.querySelector(".modal");
       c.innerHTML = '<div></div>';
       rockArray = [];
@@ -192,7 +204,9 @@ lefty.addEventListener("click", () => {
       score = 0;
         break;
       case 'p':
+      if(!gameover){
         pause = !pause;
+      }
         break;
         case " ":
         e.preventdefault();
@@ -218,7 +232,6 @@ lefty.addEventListener("click", () => {
             soundy.play();
           }
 
-          // laser.play();
           explosionArray.push(new ExplosionSheet(a, b));
           rockArray[i].y = ((Math.random() * -100) -100);
           rockArray[i].x = Math.random() * 400;
@@ -243,40 +256,7 @@ lefty.addEventListener("click", () => {
   var startTime;
   var fpsInterval;
   var framespersec;
-  // function startAnimating(fps){
-  //   fpsInterval = 1000/fps;
-  //   then = Date.now();
-  //   startTime = then;
-  //   animate();
-  // }
-  // var sprite = new Image();
-  // var cx = 0;
-  // var cy = 0;
-  // var sx = 0;
-  // var sy = 0;
-  // var swidth = 80;
-  // var sheight = 80;
-  // sprite.onload = function(){
-  //   ctx.drawImage(sprite, sx, sy, swidth, sheight, cx, cy, 50, 50);
-  // };
-  // function animate(){
-  //   requestAnimationFrame(animate);
-  //   now = Date.now();
-  //   elapsedTime = now - then;
-  //   // drawScore();
-  //
-  //   if(elapsedTime > fpsInterval){
-  //     then = now - (elapsedTime % fpsInterval);
-  //     if(!pause){
-  //       fall();
-        document.getElementById("counter").innerHTML = "lives " + (3 - count);
-        document.getElementById("score").innerHTML = "score " + (score);
-  //       // document.write('hi');
-  //       // counter.append(count);
-  //     }
-  //   }
-  // }
-  // startAnimating(30);
+
   function ExplosionSheet(ex, ey){
     var path = 'images/explode.png';
     var frameWidth = 128;
@@ -341,27 +321,43 @@ lefty.addEventListener("click", () => {
     //    ctx.drawImage(sprite, sx, sy, swidth, sheight, this.x, this.y, 60, 60);
     //  };
     this.update = function() {
+      highscore = localStorage.getItem('highscore') || 0;
+     if(highscore !== null){
+         if (score > highscore) {
+             localStorage.setItem("highscore", score);
+         }
+     }
+     else{
+         localStorage.setItem("highscore", score);
+     }
       document.getElementById("counter").innerHTML = "lives " + (3 - count);
       document.getElementById("score").innerHTML = "score " + (score);
+      document.getElementById("highscore").innerHTML = "high " + (highscore);
       if(this.y >= 480){
         this.y = ((Math.random() * -100) -100);
         this.x = Math.random() * 450;
-        count += 1;
-        if(count >= 3){
-          pause = true;
-          let c = document.querySelector(".modal");
-          c.innerHTML = '<div id="lost">You Lost<br> press R to restart</div>';
-          var node = document.createElement("p");                 // Create a <li> node
-          var textnode = document.createTextNode(score + ' was your score, try again');         // Create a text node
-          node.appendChild(textnode);                              // Append the text to <li>
-          document.getElementById("lost").appendChild(node);     // Append <li> to <ul> with id="myList"
+        if(!gameover){
+          count += 1;
+          if(count >= 3){
+
+
+            gameover = true;
+            pause = true;
+            let c = document.querySelector(".modal");
+            c.innerHTML = '<div id="lost">You Lost<br> press R to restart</div>';
+            var node = document.createElement("p");                 // Create a <li> node
+            var textnode = document.createTextNode(score + ' was your score, try again');         // Create a text node
+            node.appendChild(textnode);                              // Append the text to <li>
+            // c.appendChild(node);
+        }
+          // document.getElementById("lost").appendChild(node);     // Append <li> to <ul> with id="myList"
         }else {
-          if(!pause){
+          if(!pause && !gameover){
             this.y += 1 + score / 200;
           }
         }
 
-      }else if(!pause){
+      }else if(!pause && !gameover){
         this.y += 1 + score / 200;
       }
 
@@ -399,6 +395,7 @@ function bg(){
 }
   // new ExplosionSheet();
 function animate() {
+
    requestAnimationFrame( animate );
    ctx.clearRect(0, 0, 500, 500);
     var totalSeconds = 0;

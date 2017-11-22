@@ -18,6 +18,7 @@ canvas{
 }
 #lefty:hover{
   background-color: #4d1111;
+  cursor: pointer;
 }
 #lefty:active{
   background-color: #2d0808;
@@ -25,6 +26,7 @@ canvas{
 }
 #mutey:hover{
   background-color: #4d1111;
+  cursor:pointer;
 }
 #mutey:active{
   background-color: #2d0808;
@@ -55,26 +57,34 @@ button{
   margin: 5px;
 }
 #start{
-  margin: -10px;
-  padding-top: 20%;
-  font-size: 60px;
+  color: #ae872a !important;
+  border-radius: 25px;
+  position:absolute;
+  margin-left: 29%;
+  margin-top: 80px;
+ padding-top: 2%;
+  font-size: 40px;
   font-weight: 900;
-  z-index: 7;
-  width: 100%;
-  height: 100%;
-  background-color: #786128;
+  z-index: 5;
+  width: 520px;
+  height: 500px;
+  background-color: rgba(0, 0, 0, .5);
   color: #451606;
   position:fixed;
 }
 #lost{
-  margin: -10px;
-  padding-top: 20%;
+  color: #ae872a !important;
+  border-radius: 25px;
+  position:absolute;
+  margin-left: 29%;
+  margin-top: 80px;
+ padding-top: 2%;
   font-size: 60px;
   font-weight: 900;
   z-index: 5;
-  width: 100%;
-  height: 100%;
-  background-color: #786128;
+  width: 520px;
+  height: 500px;
+  background-color: rgba(0, 0, 0, .5);
   color: #451606;
   position:fixed;
 }
@@ -132,6 +142,7 @@ span{
 }
 h1{
   text-align: center;
+  margin: 0;
 }
 
 body {
