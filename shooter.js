@@ -79,33 +79,7 @@
 //     };
 //     this.bang();
 //   }
-//   function Asteroid(x, y){
-//     this.x = x;
-//     this.y = y;
-//     this.createAsteroid = function(){
-//       ctx.drawImage(sprite, sx, sy, swidth, sheight, this.x, this.y, 60, 60);
-//     };
-//     this.update = function(){
-//       if(this.y >= 480){
-//         this.y = 0;
-//         this.x = Math.random() * 420;
-//         count += 1;
-//         if(count >= 3){
-//           pause = true;
-//         }else {
-//           if(!pause){
-//             this.y += 4;
-//           }
-//         }
-//
-//       }else if(!pause){
-//         this.y += 4;
-//       }
-//       this.createAsteroid();
-//     };
-//     this.update();
-//   }
-//
+
 //   var rockArray = [];
 //   var explosionArray = [];
 //

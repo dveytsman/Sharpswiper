@@ -77,10 +77,30 @@ var _game2 = _interopRequireDefault(_game);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 document.addEventListener("DOMContentLoaded", function () {
+  var game = new _game2.default();
+});
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Game = function Game() {
+  _classCallCheck(this, Game);
+
+  var score = 0;
+  var highscore = localStorage.getItem('highscore') || 0;
   var gameover;
   var pause = true;
   var globalTimer = 0;
-  var score = 0;
   var sprite = new Image();
   var explode = new Image();
   explode.src = "assets/images/explode.png";
@@ -89,7 +109,6 @@ document.addEventListener("DOMContentLoaded", function () {
   var swidth = 70;
   var sheight = 70;
   var muted = true;
-  var highscore = localStorage.getItem('highscore') || 0;
   var music = new Audio("assets/sound/starwars.mp3");
   sprite.src = "assets/images/asteroid1.png";
   music.loop = true;
@@ -110,7 +129,6 @@ document.addEventListener("DOMContentLoaded", function () {
   lefty.addEventListener("click", function () {
     pause = !pause;
   });
-  var laser = new Audio("assets/sound/saberon.mp3");
   var canvas = document.querySelector("canvas");
   var ctx = canvas.getContext("2d");
   pause = false;
@@ -121,37 +139,10 @@ document.addEventListener("DOMContentLoaded", function () {
   ctx.fillStyle = "white";
   var count = 0;
 
-  function Asteroid(x, y) {
-    this.x = x;
-    this.y = y;
-    this.createAsteroid = function () {
-      ctx.drawImage(sprite, sx, sy, swidth, sheight, this.x, this.y, 60, 60);
-    };
-    this.update = function () {
-      if (this.y >= 480) {
-        this.y = 0;
-        this.x = Math.random() * 420;
-        count += 1;
-        if (count >= 3) {
-          pause = true;
-        } else {
-          if (!pause) {
-            this.y += 4;
-          }
-        }
-      } else if (!pause) {
-        this.y += 4;
-      }
-      this.createAsteroid();
-    };
-    this.update();
-  }
-
   var rockArray = [];
   var explosionArray = [];
 
   function fall() {
-
     if (globalTimer % 300 === 0 && (!gameover || !pause)) {
       if (count >= 3) {}
       rockArray.push(new SpriteSheet());
@@ -169,6 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
         highscore = localStorage.getItem('highscore') || 0;
         if (highscore !== null) {
           if (score > highscore) {
+
             localStorage.setItem("highscore", score);
           }
         } else {
@@ -181,6 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
         rockArray.push(new SpriteSheet());
         pause = false;
         count = 0;
+
         score = 0;
         break;
       case 'p':
@@ -275,13 +268,14 @@ document.addEventListener("DOMContentLoaded", function () {
       highscore = localStorage.getItem('highscore') || 0;
       if (highscore !== null) {
         if (score > highscore) {
+
           localStorage.setItem("highscore", score);
         }
       } else {
         localStorage.setItem("highscore", score);
       }
       document.getElementById("counter").innerHTML = "lives " + (3 - count);
-      document.getElementById("score").innerHTML = "score " + score;
+      document.getElementById("scoreboard").innerHTML = "score " + score;
       document.getElementById("highscore").innerHTML = "high " + highscore;
       if (this.y >= 480) {
         this.y = Math.random() * -100 - 100;
@@ -344,27 +338,13 @@ document.addEventListener("DOMContentLoaded", function () {
       y: evt.clientY - rect.top
     };
   }
-});
+}
 
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
+// ===========================================
+// OUTSIDE THE CONSTRUCTOR ===================
+// ===========================================
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Game = function Game() {
-  _classCallCheck(this, Game);
-
-  this.score = 0;
-  this.highscore = localStorage.getItem('highscore') || 0;
-};
+;
 
 exports.default = Game;
 
