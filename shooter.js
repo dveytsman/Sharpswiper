@@ -1,5 +1,5 @@
 
-var gameover = false;
+var gameover = true;
 
 var score = 0;
 var pause = true;
@@ -49,6 +49,7 @@ lefty.addEventListener("click", () => {
   const canvas = document.querySelector("canvas");
   const ctx = canvas.getContext("2d");
   pause = false;
+  // pause = true;
   gameover = true;
   let c = document.querySelector(".modal");
   c.innerHTML = '<div id="start">Welcome to Sharp swiper<br> <br>Move lightsaber across the asteroids to destroy them. Try to destroy them before they hit the ground. Miss 3 and you lose. <br> press R to start game. <br> Have fun</div>';
@@ -104,61 +105,21 @@ lefty.addEventListener("click", () => {
     };
     this.update();
   }
-  // function Square(x, y, w, h){
-  //   this.x = x;
-  //   this.y = y;
-  //   this.w = w;
-  //   this.h = h;
-  //   this.createStone = function(){
-  //     ctx.fillRect(this.x, this.y, this.h, this.w);
-  //   };
-  //   this.delete = function(){
-  //     rockArray.shift();
-  //   };
-  //   this.update = function(){
-  //     if (this.y >= 480){
-  //       this.y = 0;
-  //       this.x = Math.random()* 490;
-  //       count += 1;
-  //
-  //       if(count >= 3){
-  //         pause = true;
-  //       }
-  //     } else {
-  //       if(!pause){
-  //         this.y += 4;
-  //       }
-  //     }
-  //     this.createStone();
-  //   };
-  //   this.update();
-  // }
 
-  // sq.update();
-  // function createStone(){
-  //   ctx.fillRect(x, y, h, w);
-  // }
   var rockArray = [];
   var explosionArray = [];
-  // for (var i = 0; i < 1; i++) {
-  //   const a = 20;
-  //   const b = 20;
-  //   var c = Math.random() * 480;
-  //   var d = 0;
-  //   rockArray.push(new Square(c, d, b, a));
-  // }
+
   let timer = 0;
   function fall(){
 
 
 
 
-    if ( globalTimer % 300 === 0 && !pause) {
+    if ( globalTimer % 300 === 0 && (!gameover || !pause)) {
       if (count >=3){
-        // drawMisses();
-        // pause = true;
       }
-      rockArray.push(new SpriteSheet());
+        rockArray.push(new SpriteSheet());
+
     }
 
     ctx.clearRect(0, 0, 500, 500);
@@ -193,7 +154,6 @@ lefty.addEventListener("click", () => {
       else{
           localStorage.setItem("highscore", score);
       }
-      console.log(highscore);
       gameover =  false;
       let c = document.querySelector(".modal");
       c.innerHTML = '<div></div>';
@@ -208,9 +168,6 @@ lefty.addEventListener("click", () => {
         pause = !pause;
       }
         break;
-        case " ":
-        e.preventdefault();
-        break;
 
       default:
         return;
@@ -218,7 +175,7 @@ lefty.addEventListener("click", () => {
   });
   var humArray = [];
   document.addEventListener("mousemove", (e) => {
-    if(!pause){
+    if(!pause && !gameover){
 
     var coords = getMousePos(canvas, e);
     for (var i = 0; i < rockArray.length; i++) {
