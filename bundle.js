@@ -76,6 +76,7 @@ var _game2 = _interopRequireDefault(_game);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+window.localStorage.highscore = window.localStorage.highscore || 0;
 document.addEventListener("DOMContentLoaded", function () {
   var game = new _game2.default();
 });
@@ -91,17 +92,23 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _music = __webpack_require__(4);
+
+var _music2 = _interopRequireDefault(_music);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Game = function Game() {
   _classCallCheck(this, Game);
 
+  this.score = 0;
   var score = 0;
   var highscore = localStorage.getItem('highscore') || 0;
   var gameover;
   var pause = true;
   var globalTimer = 0;
-  var sprite = new Image();
   var explode = new Image();
   explode.src = "assets/images/explode.png";
   var sx = 0;
@@ -109,20 +116,16 @@ var Game = function Game() {
   var swidth = 70;
   var sheight = 70;
   var muted = true;
-  var music = new Audio("assets/sound/starwars.mp3");
-  sprite.src = "assets/images/asteroid1.png";
-  music.loop = true;
+  var music = new _music2.default();
   music.play();
-  music.volume = .2;
-  music.muted = true;
   var mutey = document.querySelector("#mutey");
   mutey.addEventListener("click", function () {
     muted = !muted;
-    if (music.muted) {
-      music.currentTime = 0;
-      music.muted = !music.muted;
+    if (music.music.muted) {
+      music.music.currentTime = 0;
+      music.music.muted = !music.music.muted;
     } else {
-      music.muted = !music.muted;
+      music.music.muted = !music.music.muted;
     }
   });
   var lefty = document.querySelector("#lefty");
@@ -167,8 +170,7 @@ var Game = function Game() {
           localStorage.setItem("highscore", score);
         }
         gameover = false;
-        var _c = document.querySelector(".modal");
-        _c.innerHTML = '<div></div>';
+        c.innerHTML = '<div></div>';
         rockArray = [];
         rockArray.push(new SpriteSheet());
         pause = false;
@@ -265,18 +267,6 @@ var Game = function Game() {
     this.x = Math.random() * 480;
     this.y = Math.random() * -100 - 100;
     this.update = function () {
-      highscore = localStorage.getItem('highscore') || 0;
-      if (highscore !== null) {
-        if (score > highscore) {
-
-          localStorage.setItem("highscore", score);
-        }
-      } else {
-        localStorage.setItem("highscore", score);
-      }
-      document.getElementById("counter").innerHTML = "lives " + (3 - count);
-      document.getElementById("scoreboard").innerHTML = "score " + score;
-      document.getElementById("highscore").innerHTML = "high " + highscore;
       if (this.y >= 480) {
         this.y = Math.random() * -100 - 100;
         this.x = Math.random() * 450;
@@ -304,17 +294,23 @@ var Game = function Game() {
       var col = Math.floor(currentFrame % framesPerRow);
       ctx.drawImage(image, col * frameWidth, row * frameHeight, frameWidth, frameHeight, x, y, frameWidth, frameHeight);
     };
-    var self = this;
     image.onload = function () {
       framesPerRow = Math.floor(image.width / frameWidth);
     };
     image.src = "assets/images/asteroid1.png";
   }
-  function bg() {
-    var background = new Image();
-    background.src = 'assets/images/scrollbg.png';
-  }
   function animate() {
+    highscore = localStorage.getItem('highscore') || 0;
+    if (highscore !== null) {
+      if (score > highscore) {
+        localStorage.setItem("highscore", score);
+      }
+    } else {
+      localStorage.setItem("highscore", score);
+    }
+    document.getElementById("counter").innerHTML = "lives " + (3 - count);
+    document.getElementById("scoreboard").innerHTML = "score " + score;
+    document.getElementById("highscore").innerHTML = "high " + highscore;
     requestAnimationFrame(animate);
     ctx.clearRect(0, 0, 500, 500);
     var totalSeconds = 0;
@@ -347,6 +343,45 @@ var Game = function Game() {
 ;
 
 exports.default = Game;
+
+/***/ }),
+/* 2 */,
+/* 3 */,
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Music = function () {
+  function Music() {
+    _classCallCheck(this, Music);
+
+    this.music = new Audio("assets/sound/starwars.mp3");
+    this.music.loop = true;
+    this.music.volume = .2;
+    this.music.muted = true;
+  }
+
+  _createClass(Music, [{
+    key: "play",
+    value: function play() {
+      this.music.play();
+    }
+  }]);
+
+  return Music;
+}();
+
+exports.default = Music;
 
 /***/ })
 /******/ ]);
