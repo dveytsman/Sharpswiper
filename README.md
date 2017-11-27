@@ -25,3 +25,9 @@ This project utilizes
  - JavaScript
  - HTML5
  - CSS3
+
+
+## Credits
+ - Asteroid SpriteSheet:
+   - Krasi Wasilev
+   - https://opengameart.org/content/big-explosion
