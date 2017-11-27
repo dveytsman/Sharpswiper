@@ -2,6 +2,9 @@
 https://thrage1.github.io/sharpshooter/
 
 ## ScreenShot
+<div style="text-align: center">
+  <img src="./assets/images/sharpshooter.gif" />
+</div>
 
 ![sharpshooter](https://github.com/Thrage1/sharpshooter/blob/master/images/sharpshooter.jpg)
 
