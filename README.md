@@ -1,12 +1,12 @@
 # sharpshooter
-https://thrage1.github.io/sharpshooter/
+
+[live link](https://thrage1.github.io/sharpshooter/)
 
 ## ScreenShot
+
 <div style="text-align: center">
   <img src="./assets/images/sharpshooter.gif" />
 </div>
-
-![sharpshooter](https://github.com/Thrage1/sharpshooter/blob/master/images/sharpshooter.jpg)
 
 ## Background
 The Sharpshooter game is a fun and interactive way to improve the speed and accuracy of a player with a mouse input. Rocks will fall at random intervals that decrease in time and increase in speed as the game continues. As the rocks fall to the ground the user clicks on the rocks to destroy them. When 3 rocks hit the ground, the game is over.
