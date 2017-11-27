@@ -18,39 +18,10 @@ Sharp Swiper is a fun and interactive way to improve the speed and accuracy of a
  - As game progresses the asteroids that fall past the bottom of the screen or as the asteroids are destroyed, the asteroids are recycled to the top of the screen allowing for improved efficiency
  - The speed of the falling asteroids increases by 0.5 % each time an asteroid is destroyed
 
-## Wireframes
-
-This will be a single screen game application, with links to my GitHub and LinkedIn pages.
-Game controls will include a start a stop and a restart button.  
-
-![wireframe](https://github.com/Thrage1/sharpshooter/blob/master/images/wireframe.png)
 
 ## Technologies
 
-This project will implement
+This project utilizes
  - JavaScript
  - HTML5
  - CSS3
-(More to be filled in)
-
-## Implementation timeline
-
-**Day 1**
-
- - Find and create all necessary sprites
- - Find and create all audio files
- - Find and implement the background and audio
-
-**Day 2**
-
- - Begin implementing the logic of the asteroids
- - Create and link the buttons controlling the functionality of the game
-
-**Day 3**
-
- - Implement the logic of the game
- - Add the cursor interaction with the asteroids
-
-**Day 4**
-
- - fix and polish any code
