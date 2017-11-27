@@ -31,3 +31,7 @@ This project utilizes
  - Asteroid SpriteSheet:
    - Krasi Wasilev
    - https://opengameart.org/content/big-explosion
+ - Explosion SpriteSheet:
+   - https://opengameart.org/content/explosion
+ - Music:
+   - John Williams
