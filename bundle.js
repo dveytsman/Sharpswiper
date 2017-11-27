@@ -96,6 +96,10 @@ var _music = __webpack_require__(4);
 
 var _music2 = _interopRequireDefault(_music);
 
+var _hum = __webpack_require__(5);
+
+var _hum2 = _interopRequireDefault(_hum);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -189,6 +193,11 @@ var Game = function Game() {
     }
   });
   var humArray = [];
+
+  //===================================================
+  //=========Collision Logic======================
+  //===================================================
+
   document.addEventListener("mousemove", function (e) {
     if (!pause && !gameover) {
 
@@ -375,6 +384,7 @@ var Music = function () {
     key: "play",
     value: function play() {
       this.music.play();
+      console.log('hi');
     }
   }]);
 
@@ -382,6 +392,25 @@ var Music = function () {
 }();
 
 exports.default = Music;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Hum = function Hum() {
+  _classCallCheck(this, Hum);
+};
+
+exports.default = Hum;
 
 /***/ })
 /******/ ]);
