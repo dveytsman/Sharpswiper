@@ -1,6 +1,6 @@
 # Sharp Swiper
 
-[live link](https://thrage1.github.io/sharpshooter/)
+[live link](https://thrage1.github.io/Sharpswiper/)
 
 <div style="text-align: center">
   <img src="./assets/images/sharpshooter.gif" />
